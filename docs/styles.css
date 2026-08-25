@@ -35,6 +35,9 @@ h1{
 }
 .lede{font-size:16px;color:var(--text-dim);max-width:62ch;margin:0 0 28px;}
 
+.howto{margin-bottom:20px;}
+.howto p{color:var(--text-dim);font-size:14px;max-width:62ch;margin:0 0 8px;}
+
 .game-toolbar{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px;
   font-family:var(--font-mono);font-size:13px;
