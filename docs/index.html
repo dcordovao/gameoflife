@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game of Life</title>
+<meta name="description" content="Puerto en JavaScript del autómata celular de Conway de Diego Córdova, originalmente escrito en C++ con SDL2.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<main>
+  <p class="eyebrow">Diego Córdova</p>
+  <h1>Game of Life</h1>
+  <p class="lede">
+    Puerto en JavaScript del autómata celular de Conway. La versión original está escrita en
+    C++ con SDL2 — el código de ambas versiones vive en este mismo
+    <a href="https://github.com/dcordovao/gameoflife">repositorio</a>.
+  </p>
+
+  <div class="game-toolbar">
+    <label for="mapSelect">Mapa</label>
+    <select id="mapSelect">
+      <option value="empty.txt">Vacío</option>
+      <option value="travellers.txt" selected>Travellers</option>
+      <option value="love.txt">Love</option>
+      <option value="map1.txt">Map1</option>
+    </select>
+    <span id="gameStatus" class="status">Pausado</span>
+  </div>
+
+  <div class="game-canvas-wrap">
+    <canvas id="lifeCanvas"></canvas>
+  </div>
+
+  <div class="chips">
+    <span class="chip">Click en una celda: vivo/muerto</span>
+    <span class="chip">P: pausa / reproducir</span>
+    <span class="chip">E: modo parpadeo</span>
+  </div>
+</main>
+
+<footer>
+  <span>Diego Córdova · Viña del Mar, Chile</span>
+</footer>
+
+<script src="game.js"></script>
+</body>
+</html>
