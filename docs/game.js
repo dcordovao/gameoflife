@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', function () {
   var ctx = canvas.getContext('2d');
   var mapSelect = document.getElementById('mapSelect');
   var statusEl = document.getElementById('gameStatus');
+  var playPauseBtn = document.getElementById('playPauseBtn');
 
   var colorDead = '#14171F';
   var colorLive = '#4FBFAE';
-  var colorLiveFlash = '#E7A33E';
   var colorGrid = '#2C3242';
 
-  var rows, grid, nextGrid, paused, flashMode, flashPhase, tickHandle;
+  var rows, grid, nextGrid, paused, tickHandle;
 
   function parseMap(text) {
     var lines = text.split('\n').filter(function (line) { return line.length > 0; });
@@ -71,15 +71,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var swap = grid;
     grid = nextGrid;
     nextGrid = swap;
-    flashPhase = !flashPhase;
   }
 
   function render() {
     ctx.fillStyle = colorDead;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    var liveColor = flashMode && flashPhase ? colorLiveFlash : colorLive;
-    ctx.fillStyle = liveColor;
+    ctx.fillStyle = colorLive;
     for (var x = 0; x < cols; x++) {
       for (var y = 0; y < rows; y++) {
         if (grid[x][y]) {
@@ -104,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function updateStatus() {
-    statusEl.textContent = (paused ? 'Pausado' : 'Reproduciendo') + (flashMode ? ' · parpadeo activo' : '');
+    statusEl.textContent = paused ? 'Pausado' : 'Reproduciendo';
   }
 
   function startTicking() {
@@ -126,6 +124,13 @@ document.addEventListener('DOMContentLoaded', function () {
     paused = value;
     if (paused) stopTicking(); else startTicking();
     updateStatus();
+    updatePlayPauseButton();
+  }
+
+  function updatePlayPauseButton() {
+    playPauseBtn.classList.toggle('is-paused', paused);
+    playPauseBtn.classList.toggle('is-playing', !paused);
+    playPauseBtn.setAttribute('aria-label', paused ? 'Reproducir' : 'Pausar');
   }
 
   function loadMap(file) {
@@ -153,10 +158,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('keydown', function (evt) {
     if (evt.key === 'p' || evt.key === 'P') {
       setPaused(!paused);
-    } else if (evt.key === 'e' || evt.key === 'E') {
-      flashMode = !flashMode;
-      updateStatus();
-      render();
     }
   });
 
@@ -164,8 +165,10 @@ document.addEventListener('DOMContentLoaded', function () {
     loadMap(mapSelect.value);
   });
 
+  playPauseBtn.addEventListener('click', function () {
+    setPaused(!paused);
+  });
+
   paused = true;
-  flashMode = false;
-  flashPhase = false;
   loadMap(mapSelect.value);
 });
