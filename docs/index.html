@@ -21,6 +21,11 @@
     <a href="https://github.com/dcordovao/gameoflife">repositorio</a>.
   </p>
 
+  <div class="howto">
+    <p>El algoritmo simula vida: células que nacen y mueren según reglas simples.</p>
+    <p>Hacé click en la grilla para ir creando células, después dale play y experimentá cómo se comportan.</p>
+  </div>
+
   <div class="game-toolbar">
     <label for="mapSelect">Mapa</label>
     <select id="mapSelect">
@@ -30,6 +35,7 @@
       <option value="map1.txt">Map1</option>
     </select>
     <span id="gameStatus" class="status">Pausado</span>
+    <button id="playPauseBtn" class="play-btn" type="button" aria-label="Reproducir"></button>
   </div>
 
   <div class="game-canvas-wrap">
@@ -38,8 +44,7 @@
 
   <div class="chips">
     <span class="chip">Click en una celda: vivo/muerto</span>
-    <span class="chip">P: pausa / reproducir</span>
-    <span class="chip">E: modo parpadeo</span>
+    <span class="chip">Botón o P: pausa / reproducir</span>
   </div>
 </main>
 
